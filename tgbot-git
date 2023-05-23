@@ -10,7 +10,7 @@ bot = telebot.TeleBot(token)
 
 @bot.message_handler(content_types=['text'])
 def commands(message):
-    if message.text == "Старт":
+    if message.text == "/start":
         back_post_id = None
         while True:
             post_text = parser(back_post_id)
@@ -20,7 +20,7 @@ def commands(message):
                 bot.send_message(channel_id, post_text[0])
                 time.sleep(1800)
     else:
-        bot.send_message(message.from_user.id, "Напишите "Старт" для запуска бота)
+        bot.send_message(message.from_user.id, "Напишите /start для начала")
 
 def parser(back_post_id):
     URL = "https://koopteh.onego.ru/news/allnews/"
@@ -34,8 +34,8 @@ def parser(back_post_id):
     if post_id != back_post_id:
         title = soup.find("div", class_="link-title").text.strip()
         description = soup.find("div", class_="notice").text.strip()
-        
-        return f"{title}\n\n{description}\n\n", post_id
+
+        return f"{title}\n\n{description}\n\n{URL}", post_id
     else:
         return None, post_id
 
