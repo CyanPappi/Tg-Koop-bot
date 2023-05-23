@@ -1,13 +1,12 @@
 import telebot
 import requests
 import time
+from setttings import TG_TOKEN
 
 from bs4 import BeautifulSoup
-
-token = "5924181697:AAEyNZJSTtEE91tVhWvqcS-J4nskS0thTMQ"
 channel_id = "@novostiemaeblin"
-bot = telebot.TeleBot(token)
 
+bot = telebot.TeleBot(TG_TOKEN)
 @bot.message_handler(content_types=['text'])
 def commands(message):
     if message.text == "/start":
